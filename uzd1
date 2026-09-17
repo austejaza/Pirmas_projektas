@@ -3,6 +3,7 @@
 #include <vector>
 #include <iomanip>
 #include <algorithm>
+#include <sstream>
 
 using std::string;
 using std::vector;
@@ -45,15 +46,22 @@ int main()
         std::cout << "iveskite per tarpa studento varda ir pav: ";
         std::cin >> A.vardas >> A.pavarde;
 
-        std::cout << "iveskite semestro paz. kieki: ";
-        std::cin >> k;
+        std::cin.ignore(1000, '\n');
 
-        for (int i = 0; i < k; i++)
-        {
-            std::cout << "iveskite " << i + 1 << " paz.: ";
-            int a;
-            std::cin >> a;
-            A.paz.push_back(a);
+        std::cout << "Iveskite ND pazymius (spauskite ENTER tuscioje eiluteje, kad baigtumete):\n";
+        string eilute;
+        while (true) {
+            std::getline(std::cin, eilute);
+            
+            if (eilute.empty()) {
+                break;
+            }
+
+            std::stringstream ss(eilute);
+            int pazymys;
+            while (ss >> pazymys) {
+                A.paz.push_back(pazymys);
+            }
         }
 
         std::cout << "iveskite semestro Egzamino paz: ";
@@ -63,7 +71,7 @@ int main()
         for (int p : A.paz) {
             sum += p;
         }
-        float vid = k > 0 ? sum / k : 0;
+        float vid = !A.paz.empty() ? sum / A.paz.size() : 0.0;
 
         float med = Mediana(A.paz);
 
@@ -118,5 +126,4 @@ void printas(studentas &A, int pasirinkimas)
                   << std::right << std::setw(18) << std::fixed << std::setprecision(2) << A.galutinis_med;
     }
     std::cout << "\n";
-}
 }
