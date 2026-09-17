@@ -1,0 +1,82 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <iomanip>
+#include <algorithm>
+
+using std::string;
+using std::vector;
+
+struct studentas {
+    string vardas, pavarde;
+    vector<int> paz;
+    int exam;
+    float galutinis_vid;
+    float galutinis_med;
+};
+
+void printas(studentas &A);
+
+int main()
+{
+    int k;
+    vector<studentas> grupe;
+    studentas A;
+
+    std::cout << "kiek yra studentu sarase: ";
+    int n;
+    std::cin >> n;
+
+    for (int j = 0; j < n; j++)
+    {
+        std::cout << "iveskite per tarpa studento varda ir pav: ";
+        std::cin >> A.vardas >> A.pavarde;
+
+        std::cout << "iveskite semestro paz. kieki: ";
+        std::cin >> k;
+
+        for (int i = 0; i < k; i++)
+        {
+            std::cout << "iveskite " << i + 1 << " paz.: ";
+            int a;
+            std::cin >> a;
+            A.paz.push_back(a);
+        }
+
+        std::cout << "iveskite semestro Egzamino paz: ";
+        std::cin >> A.exam;
+
+        // Vidurkio skaičiavimas
+        float sum = 0;
+        for (int p : A.paz) {
+            sum += p;
+        }
+        float vid = k > 0 ? sum / k : 0;
+
+        A.galutinis_vid = 0.4 * vid + 0.6 * A.exam;
+
+        grupe.push_back(A);
+        A.paz.clear();
+    }
+
+    std::cout << "\n" 
+              << std::left << std::setw(15) << "Pavarde" 
+              << std::left << std::setw(15) << "Vardas" 
+              << std::right << std::setw(20) << "Galutinis (Vid.)" << "\n";
+    std::cout << string(50, '-') << "\n";
+
+    for (studentas &B : grupe)
+    {
+        printas(B);
+    }
+
+    return 0;
+}
+
+void printas(studentas &A)
+{
+    std::cout << std::left << std::setw(15) << A.pavarde
+              << std::left << std::setw(15) << A.vardas
+              << std::right << std::setw(20) << std::fixed << std::setprecision(2) << A.galutinis_vid
+              << "\n";
+}
