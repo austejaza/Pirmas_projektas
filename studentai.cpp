@@ -81,8 +81,8 @@ printas(B);
 
 
 void printas( studentas &A){
-  std::cout<<std::left<<std::setw(12)<<A.vardas<<std::left<<std::setw(12)<<A.pavarde<<;
+  std::cout<<std::left<<std::setw(12)<<A.vardas<<std::left<<std::setw(12)<<A.pavarde;
   std::cout<<std::right<<std::setw(20)<<std::fixed<<std::setprecision(2)<<A.galutinis;
-  std::cout<<std::right<<std<<setw(20)<<std::fixed<<std::setprecision(2)<<A.galutinis_med;
-  
+  std::cout<<std::right<<std::setw(20)<<std::fixed<<std::setprecision(2)<<A.galutinis_med;
+  std::cout << "\n";
 }
