@@ -2,19 +2,33 @@
 #include <string>
 #include <vector>
 #include <iomanip>
+#include <algorithm>
 using std::string;
 using std::vector;
+
 struct studentas{
     string vardas, pavarde;
     vector<int> paz;
     int exam;
     float galutinis;
+    float galutinis_med;
 };
+
+float Mediana(vector<int> paz) {
+  if (paz.empty()) return 0.0;
+  std::sort(paz.begin(), paz.end());
+  size_t n = paz.size();
+  if (n % 2 == 0){
+     retuen (paz[n / 2 - 1] + paz[n / 2]) / 2.0;
+  } else{
+     return paz[n / 2];
+  }
+}
 
 void printas(studentas &A);
 
-int main()
-{ int k;    
+int main(){
+  int k;    
   std::vector<studentas> grupe;
   studentas A;
   std::cout<<"kiek yra studentu sarase: ";
@@ -40,14 +54,25 @@ int main()
 }
 float vid = k >0? sum/k:0;
 A.galutinis = 0.4*vid+0.6*A.exam;
+
+float med = Mediana(A.paz);
+A.galutinis_med = 0.4 * med + 0.6 * A.exam;
   grupe.push_back(A);
-  //A.pavarde.clear();
-  //A.vardas.clear();
   A.paz.clear();
-  }
+}
+
+std::sort(grupe.begin(), grupe.end(), [](const studentas &a, const studentas &b) {
+    return a.pavarde < b.pavarde;
+});
   
-  std::cout<<"studento duom.: \n";
-  for (studentas &B:grupe)
+  std::cout<<"\n";
+           << std::left << std::setw(12) << "Vardas"
+           << std::left << std::setw(12) << "Pavarde"
+           << std::right << std::setw(18) << "Galutinis (Vid.)"
+           << std::right << std::setw(18) << "Galutinis (Med.)" <<"\n";
+ std::cout << string(60, '-') << "\n";
+  
+for (studentas &B:grupe)
 {
 printas(B);
 }
