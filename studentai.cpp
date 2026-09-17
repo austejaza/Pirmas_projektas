@@ -19,7 +19,7 @@ float Mediana(vector<int> paz) {
   std::sort(paz.begin(), paz.end());
   size_t n = paz.size();
   if (n % 2 == 0){
-     retuen (paz[n / 2 - 1] + paz[n / 2]) / 2.0;
+     return (paz[n / 2 - 1] + paz[n / 2]) / 2.0;
   } else{
      return paz[n / 2];
   }
@@ -65,7 +65,7 @@ std::sort(grupe.begin(), grupe.end(), [](const studentas &a, const studentas &b)
     return a.pavarde < b.pavarde;
 });
   
-  std::cout<<"\n";
+  std::cout<<"\n"
            << std::left << std::setw(12) << "Vardas"
            << std::left << std::setw(12) << "Pavarde"
            << std::right << std::setw(18) << "Galutinis (Vid.)"
@@ -81,8 +81,8 @@ printas(B);
 
 
 void printas( studentas &A){
-  std::cout<<"|"<<std::left<<std::setw(10)<<A.vardas<<"|"<<std::left<<std::setw(10)<<A.pavarde<<"|";
-  for(int p: A.paz) std::cout<<std::right<<std::setw(3)<<p<<"|";
-  std::cout<<std::right<<std::setw(5)<<A.exam<<"|\n";
-  std::cout<<"|"<< std::right<<std::setw(5)<<std::fixed<<std::setprecision(1)<<A.galutinis;
+  std::cout<<std::left<<std::setw(12)<<A.vardas<<std::left<<std::setw(12)<<A.pavarde<<;
+  std::cout<<std::right<<std::setw(20)<<std::fixed<<std::setprecision(2)<<A.galutinis;
+  std::cout<<std::right<<std<<setw(20)<<std::fixed<<std::setprecision(2)<<A.galutinis_med;
+  
 }
