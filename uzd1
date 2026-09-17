@@ -4,6 +4,8 @@
 #include <iomanip>
 #include <algorithm>
 #include <sstream>
+#include <cstdlib>
+#include <ctime>
 
 using std::string;
 using std::vector;
@@ -33,7 +35,7 @@ void printas(studentas &A, int pasirinkimas);
 
 int main()
 {
-    int k;
+    srand(time(0));
     vector<studentas> grupe;
     studentas A;
 
@@ -46,27 +48,45 @@ int main()
         std::cout << "iveskite per tarpa studento varda ir pav: ";
         std::cin >> A.vardas >> A.pavarde;
 
-        std::cin.ignore(1000, '\n');
+        int ivesties_budas;
+        std::cout << "\nPasirinkite pazymiu ivedimo buda:\n";
+        std::cout << "1 - Ivesti pazymius rankiniu budu\n";
+        std::cout << "2 - Generuoti pazymius atsitiktinai\n";
+        std::cout << "Pasirinkimas (1-2): ";
+        std::cin >> ivesties_budas;
 
-        std::cout << "Iveskite ND pazymius (spauskite ENTER tuscioje eiluteje, kad baigtumete):\n";
-        string eilute;
-        while (true) {
-            std::getline(std::cin, eilute);
-            
-            if (eilute.empty()) {
-                break;
-            }
+        if (ivesties_budas == 2) {
+            int nd_kiekis;
+            std::cout << "Kiek atsitiktiniu ND pazymiu sugeneruoti? ";
+            std::cin >> nd_kiekis;
 
-            std::stringstream ss(eilute);
-            int pazymys;
-            while (ss >> pazymys) {
-                A.paz.push_back(pazymys);
+            for (int i = 0; i < nd_kiekis; i++) {
+                A.paz.push_back(rand() % 10 + 1);
             }
-        }
+            A.exam = rand() % 10 + 1;
+
+            std::cout << "Sugeneruoti ND pazymiai: ";
+            for (int p : A.paz) std::cout << p << " ";
+            std::cout << "\nSugeneruotas egzamino pazymys: " << A.exam << "\n";
+        } 
+        else {
+            std::cin.ignore(1000, '\n');
+            std::cout << "Iveskite ND pazymius (spauskite du kartus ENTER, kad baigtumete):\n";
+            string eilute;
+            while (true) {
+                std::getline(std::cin, eilute);
+                if (eilute.empty()) break;
+
+                std::stringstream ss(eilute);
+                int pazymys;
+                while (ss >> pazymys) {
+                    A.paz.push_back(pazymys);
+                }
+            }
 
         std::cout << "iveskite semestro Egzamino paz: ";
         std::cin >> A.exam;
-
+        }
         float sum = 0;
         for (int p : A.paz) {
             sum += p;
