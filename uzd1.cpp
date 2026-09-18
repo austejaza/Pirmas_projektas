@@ -109,6 +109,7 @@ int main()
 
     for (int j = 0; j < n; j++)
     {
+        A.paz.clear();
         std::cout << "iveskite per tarpa studento varda ir pav: ";
         std::cin >> A.vardas >> A.pavarde;
 
@@ -150,7 +151,7 @@ int main()
 
         A.exam = ivestiSkaiciu("iveskite semestro Egzamino paz: ");
         }
-        }
+        
         float sum = 0;
         for (int p : A.paz) {
             sum += p;
@@ -165,7 +166,7 @@ int main()
         grupe.push_back(A);
         A.paz.clear();
     }
-
+    }
     std::cout << "\nKaip skaiciuoti galutini bala?\n";
     std::cout << "1 - Pagal vidurki\n";
     std::cout << "2 - Pagal mediana\n";
