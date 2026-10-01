@@ -44,7 +44,33 @@ float Mediana(vector<int> paz) {
     }
 }
 
+void generuotiFaila(string failoPavadinimas, int kiekis, int nd_kiekis = 5) {
+    std::ofstream f(failoPavadinimas);
+
+    // Antraštė
+    f << "Vardas          Pavarde         ";
+    for (int j = 1; j <= nd_kiekis; j++) {
+        f << "ND" << j << " ";
+    }
+    f << "Egzaminas\n";
+
+    // Generuojame duomenis
+    for (int i = 1; i <= kiekis; i++) {
+        f << "Vardas" << i << "         "
+          << "Pavarde" << i << "        ";
+
+        for (int j = 0; j < nd_kiekis; j++) {
+            f << (rand() % 10 + 1) << " ";
+        }
+        f << (rand() % 10 + 1) << "\n";
+    }
+
+    f.close();
+    std::cout << "Failas " << failoPavadinimas << " sekmingai sugeneruotas!\n";
+}
+
 void printas(studentas &A, int pasirinkimas);
+
 
 int main()
 {
@@ -52,16 +78,40 @@ int main()
     vector<studentas> grupe;
     studentas A;
 
+    string failo_pavadinimas = "";
+
     int saltinis;
     std::cout << "Pasirinkite duomenu saltini:\n";
     std::cout << "1 - Skaityti is failo\n";
     std::cout << "2 - Ivesti ranka / generuoti atsitiktinai\n";
-    saltinis = ivestiSkaiciu("Pasirinkimas (1-2): ");
+    std::cout << "3 - Sugeneruoti nauja studentu faila\n";
+    saltinis = ivestiSkaiciu("Pasirinkimas (1-3): ");
+
+    if (saltinis == 3) {
+        std::cout << "\nPasirinkite failo dydi:\n";
+        std::cout << "1 - 1 000 irasu (studentai1000.txt)\n";
+        std::cout << "2 - 10 000 irasu (studentai10000.txt)\n";
+        std::cout << "3 - 100 000 irasu (studentai100000.txt)\n";
+        std::cout << "4 - 1 000 000 irasu (studentai1000000.txt)\n";
+        std::cout << "5 - 10 000 000 irasu (studentai10000000.txt)\n";
+
+        int dydis = ivestiSkaiciu("Pasirinkimas (1-5): ");
+
+        if (dydis == 1) generuotiFaila("studentai1000.txt", 1000);
+        else if (dydis == 2) generuotiFaila("studentai10000.txt", 10000);
+        else if (dydis == 3) generuotiFaila("studentai100000.txt", 100000);
+        else if (dydis == 4) generuotiFaila("studentai1000000.txt", 1000000);
+        else if (dydis == 5) generuotiFaila("studentai10000000.txt", 10000000);
+        else std::cout << "Neteisingas pasirinkimas!\n";
+
+        saltinis = 1;
+    }
 
     if (saltinis == 1) {
-        string failo_pavadinimas;
-        std::cout << "Iveskite failo pavadinima (pvz., kursiokai.txt arba studenti20000.txt): ";
-        std::cin >> failo_pavadinimas;
+        if (failo_pavadinimas == "") {
+            std::cout << "Iveskite failo pavadinima (pvz., kursiokai.txt arba studentai1000.txt): ";
+            std::cin >> failo_pavadinimas;
+        }
 
         std::ifstream fd(failo_pavadinimas);
         if (!fd.is_open()) {
@@ -77,7 +127,7 @@ int main()
             if (eilute.empty()) continue;
 
             std::stringstream ss(eilute);
-            ss >> A.pavarde >> A.vardas;
+            ss >> A.vardas >> A.pavarde;
 
             int skaicius;
             vector<int> visi_skaiciai;
@@ -174,13 +224,19 @@ int main()
     int pasirinkimas = ivestiSkaiciu("Pasirinkimas (1-3): ");
 
     std::sort(grupe.begin(), grupe.end(), [](const studentas &a, const studentas &b) {
-        if (a.pavarde != b.pavarde) return a.pavarde < b.pavarde;
-        return a.vardas < b.vardas;
-    });
+
+    if (a.vardas.substr(0, 6) == "Vardas" && b.vardas.substr(0, 6) == "Vardas") {
+        try {
+            return std::stoi(a.vardas.substr(6)) < std::stoi(b.vardas.substr(6));
+        } catch (...) {}
+    }
+
+    return a.vardas < b.vardas;
+});
 
     std::cout << "\n"
-              << std::left << std::setw(15) << "Pavarde"
-              << std::left << std::setw(15) << "Vardas";
+              << std::left << std::setw(15) << "Vardas"
+              << std::left << std::setw(15) << "Pavarde";
     if (pasirinkimas == 1) {
         std::cout << std::right << std::setw(18) << "Galutinis (Vid.)" << "\n";
         std::cout << string(48, '-') << "\n";
@@ -203,8 +259,8 @@ int main()
 
 void printas(studentas &A, int pasirinkimas)
 {
-    std::cout << std::left << std::setw(15) << A.pavarde
-              << std::left << std::setw(15) << A.vardas;
+    std::cout << std::left << std::setw(15) << A.vardas
+              << std::left << std::setw(15) << A.pavarde;
     if (pasirinkimas == 1) {
         std::cout << std::right << std::setw(18) << std::fixed << std::setprecision(2) << A.galutinis_vid;
     } else if (pasirinkimas == 2) {
@@ -215,6 +271,3 @@ void printas(studentas &A, int pasirinkimas)
     }
     std::cout << "\n";
 }
-
-//sinchronizacija 1
-
