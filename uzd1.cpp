@@ -10,6 +10,7 @@
 
 using std::string;
 using std::vector;
+using std::ofstream;
 
 
 struct studentas {
@@ -47,14 +48,12 @@ float Mediana(vector<int> paz) {
 void generuotiFaila(string failoPavadinimas, int kiekis, int nd_kiekis = 5) {
     std::ofstream f(failoPavadinimas);
 
-    // Antraštė
     f << "Vardas          Pavarde         ";
     for (int j = 1; j <= nd_kiekis; j++) {
         f << "ND" << j << " ";
     }
     f << "Egzaminas\n";
 
-    // Generuojame duomenis
     for (int i = 1; i <= kiekis; i++) {
         f << "Vardas" << i << "         "
           << "Pavarde" << i << "        ";
@@ -69,8 +68,42 @@ void generuotiFaila(string failoPavadinimas, int kiekis, int nd_kiekis = 5) {
     std::cout << "Failas " << failoPavadinimas << " sekmingai sugeneruotas!\n";
 }
 
+
 void printas(studentas &A, int pasirinkimas);
 
+void isvestiIFaila(const string &failoPavadinimas, const vector<studentas> &sarasas, int pasirinkimas) {
+    ofstream out(failoPavadinimas);
+    if (!out.is_open()) return;
+
+    out << std::left << std::setw(15) << "Vardas"
+        << std::left << std::setw(15) << "Pavarde";
+    if (pasirinkimas == 1) {
+        out << std::right << std::setw(18) << "Galutinis (Vid.)" << "\n";
+        out << string(48, '-') << "\n";
+    } else if (pasirinkimas == 2) {
+        out << std::right << std::setw(18) << "Galutinis (Med.)" << "\n";
+        out << string(48, '-') << "\n";
+    } else {
+        out << std::right << std::setw(18) << "Galutinis (Vid.)"
+            << std::right << std::setw(18) << "Galutinis (Med.)" << "\n";
+        out << string(66, '-') << "\n";
+    }
+
+    for (const auto &s : sarasas) {
+        out << std::left << std::setw(15) << s.vardas
+            << std::left << std::setw(15) << s.pavarde;
+        if (pasirinkimas == 1) {
+            out << std::right << std::setw(18) << std::fixed << std::setprecision(2) << s.galutinis_vid;
+        } else if (pasirinkimas == 2) {
+            out << std::right << std::setw(18) << std::fixed << std::setprecision(2) << s.galutinis_med;
+        } else {
+            out << std::right << std::setw(18) << std::fixed << std::setprecision(2) << s.galutinis_vid
+                << std::right << std::setw(18) << std::fixed << std::setprecision(2) << s.galutinis_med;
+        }
+        out << "\n";
+    }
+    out.close();
+}
 
 int main()
 {
@@ -252,7 +285,24 @@ int main()
     for (studentas &B : grupe)
     {
         printas(B, pasirinkimas);
+}
+
+    vector<studentas> vargsiukai;
+    vector<studentas> kietiakiai;
+
+    for (const auto &s : grupe) {
+        float balas = (pasirinkimas == 2) ? s.galutinis_med : s.galutinis_vid;
+        if (balas < 5.0) {
+            vargsiukai.push_back(s);
+        } else {
+            kietiakiai.push_back(s);
+        }
     }
+
+    isvestiIFaila("vargsiukai.txt", vargsiukai, pasirinkimas);
+    isvestiIFaila("kietiakiai.txt", kietiakiai, pasirinkimas);
+
+    std::cout << "\nStudentai sekmingai isrusiuoti i 'vargsiukai.txt' ir 'kietiakiai.txt'!\n";
 
     return 0;
 }
