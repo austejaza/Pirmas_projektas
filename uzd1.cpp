@@ -33,10 +33,10 @@ int ivestiSkaiciu(const string &zinute) {
 
 float Mediana(vector<int> paz) {
     if (paz.empty()) return 0.0;
-    
+
     std::sort(paz.begin(), paz.end());
     size_t n = paz.size();
-    
+
     if (n % 2 == 0) {
         return (paz[n / 2 - 1] + paz[n / 2]) / 2.0;
     } else {
@@ -133,7 +133,7 @@ int main()
             std::cout << "Sugeneruoti ND pazymiai: ";
             for (int p : A.paz) std::cout << p << " ";
             std::cout << "\nSugeneruotas egzamino pazymys: " << A.exam << "\n";
-        } 
+        }
         else {
             std::cin.ignore(1000, '\n');
             std::cout << "Iveskite ND pazymius (spauskite du kartus ENTER, kad baigtumete):\n";
@@ -151,7 +151,7 @@ int main()
 
         A.exam = ivestiSkaiciu("iveskite semestro Egzamino paz: ");
         }
-        
+
         float sum = 0;
         for (int p : A.paz) {
             sum += p;
@@ -178,9 +178,9 @@ int main()
         return a.vardas < b.vardas;
     });
 
-    std::cout << "\n" 
-              << std::left << std::setw(15) << "Pavarde" 
-              << std::left << std::setw(15) << "Vardas"; 
+    std::cout << "\n"
+              << std::left << std::setw(15) << "Pavarde"
+              << std::left << std::setw(15) << "Vardas";
     if (pasirinkimas == 1) {
         std::cout << std::right << std::setw(18) << "Galutinis (Vid.)" << "\n";
         std::cout << string(48, '-') << "\n";
@@ -188,7 +188,7 @@ int main()
         std::cout << std::right << std::setw(18) << "Galutinis (Med.)" << "\n";
         std::cout << string(48, '-') << "\n";
     } else {
-        std::cout << std::right << std::setw(18) << "Galutinis (Vid.)" 
+        std::cout << std::right << std::setw(18) << "Galutinis (Vid.)"
                   << std::right << std::setw(18) << "Galutinis (Med.)" << "\n";
         std::cout << string(66, '-') << "\n";
     }
@@ -215,3 +215,6 @@ void printas(studentas &A, int pasirinkimas)
     }
     std::cout << "\n";
 }
+
+//sinchronizacija 1
+
