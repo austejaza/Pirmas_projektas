@@ -1,0 +1,38 @@
+# depslib dependency file v1.0
+1790879396 source:c:\users\auste\desktop\lala\funkcijos.cpp
+	"funkcijos.h"
+	<iostream>
+	<fstream>
+	<iomanip>
+	<cstdlib>
+
+1790879362 c:\users\auste\desktop\lala\funkcijos.h
+	<string>
+	<vector>
+	"studentas.h"
+
+1790879906 c:\users\auste\desktop\lala\studentas.h
+	<string>
+	<vector>
+
+1790879725 source:c:\users\auste\desktop\lala\main.cpp
+	<iostream>
+	<string>
+	<vector>
+	<iomanip>
+	<algorithm>
+	<sstream>
+	<cstdlib>
+	<ctime>
+	<fstream>
+	"studentas.h"
+	"funkcijos.h"
+
+1790879928 source:c:\users\auste\desktop\lala\studentas.cpp
+	"studentas.h"
+	<algorithm>
+	<numeric>
+
+1743445502 source:c:\users\auste\desktop\lala\v0.2_projektas\main.cpp
+	<iostream>
+
