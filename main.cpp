@@ -16,7 +16,7 @@ using std::vector;
 
 int main() {
     srand(time(0));
-    vector<studentas> grupe;
+    vector<studentas> sarasas;
     studentas A;
 
     string failo_pavadinimas = "";
@@ -29,27 +29,26 @@ int main() {
 
     if (saltinis == 3) {
         std::cout << "\nPasirinkite failo dydi:\n";
-        std::cout << "1 - 1 000 irasu (studentai1000.txt)\n";
-        std::cout << "2 - 10 000 irasu (studentai10000.txt)\n";
-        std::cout << "3 - 100 000 irasu (studentai100000.txt)\n";
-        std::cout << "4 - 1 000 000 irasu (studentai1000000.txt)\n";
-        std::cout << "5 - 10 000 000 irasu (studentai10000000.txt)\n";
+        std::cout << "1 - 1 000 irasu\n";
+        std::cout << "2 - 10 000 irasu\n";
+        std::cout << "3 - 100 000 irasu\n";
+        std::cout << "4 - 1 000 000 irasu\n";
+        std::cout << "5 - 10 000 000 irasu\n";
 
         int dydis = ivestiSkaiciu("Pasirinkimas (1-5): ");
 
-        if (dydis == 1) generuotiFaila("studentai1000.txt", 1000);
-        else if (dydis == 2) generuotiFaila("studentai10000.txt", 10000);
-        else if (dydis == 3) generuotiFaila("studentai100000.txt", 100000);
-        else if (dydis == 4) generuotiFaila("studentai1000000.txt", 1000000);
-        else if (dydis == 5) generuotiFaila("studentai10000000.txt", 10000000);
-        else std::cout << "Neteisingas pasirinkimas!\n";
+        if (dydis == 1) { failo_pavadinimas = "studentai1000.txt"; generuotiFaila(failo_pavadinimas, 1000); }
+        else if (dydis == 2) { failo_pavadinimas = "studentai10000.txt"; generuotiFaila(failo_pavadinimas, 10000); }
+        else if (dydis == 3) { failo_pavadinimas = "studentai100000.txt"; generuotiFaila(failo_pavadinimas, 100000); }
+        else if (dydis == 4) { failo_pavadinimas = "studentai1000000.txt"; generuotiFaila(failo_pavadinimas, 1000000); }
+        else if (dydis == 5) { failo_pavadinimas = "studentai10000000.txt"; generuotiFaila(failo_pavadinimas, 10000000); }
 
         saltinis = 1;
     }
 
     if (saltinis == 1) {
         if (failo_pavadinimas == "") {
-            std::cout << "Iveskite failo pavadinima (pvz., kursiokai.txt arba studentai1000.txt): ";
+            std::cout << "Iveskite failo pavadinima: ";
             std::cin >> failo_pavadinimas;
         }
 
@@ -88,7 +87,7 @@ int main() {
             A.galutinis_vid = 0.4 * vid + 0.6 * A.exam;
             A.galutinis_med = 0.4 * med + 0.6 * A.exam;
 
-            grupe.push_back(A);
+            sarasas.push_back(A);
             A.paz.clear();
         }
         fd.close();
@@ -147,7 +146,7 @@ int main() {
             A.galutinis_vid = 0.4 * vid + 0.6 * A.exam;
             A.galutinis_med = 0.4 * med + 0.6 * A.exam;
 
-            grupe.push_back(A);
+            sarasas.push_back(A);
             A.paz.clear();
         }
     }
@@ -158,7 +157,7 @@ int main() {
     std::cout << "3 - Abu variantus\n";
     int pasirinkimas = ivestiSkaiciu("Pasirinkimas (1-3): ");
 
-    std::sort(grupe.begin(), grupe.end(), [](const studentas &a, const studentas &b) {
+    std::sort(sarasas.begin(), sarasas.end(), [](const studentas &a, const studentas &b) {
         if (a.vardas.substr(0, 6) == "Vardas" && b.vardas.substr(0, 6) == "Vardas") {
             try {
                 return std::stoi(a.vardas.substr(6)) < std::stoi(b.vardas.substr(6));
@@ -182,14 +181,14 @@ int main() {
         std::cout << string(66, '-') << "\n";
     }
 
-    for (studentas &B : grupe) {
+    for (studentas &B : sarasas) {
         printas(B, pasirinkimas);
     }
 
     vector<studentas> vargsiukai;
     vector<studentas> kietiakiai;
 
-    for (const auto &s : grupe) {
+    for (const auto &s : sarasas) {
         float balas = (pasirinkimas == 2) ? s.galutinis_med : s.galutinis_vid;
         if (balas < 5.0) {
             vargsiukai.push_back(s);

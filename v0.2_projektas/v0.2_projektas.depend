@@ -1,12 +1,15 @@
 # depslib dependency file v1.0
-1790879396 source:c:\users\auste\desktop\lala\funkcijos.cpp
+1790883639 source:c:\users\auste\desktop\lala\funkcijos.cpp
 	"funkcijos.h"
 	<iostream>
 	<fstream>
+	<sstream>
 	<iomanip>
+	<limits>
 	<cstdlib>
+	<ctime>
 
-1790879362 c:\users\auste\desktop\lala\funkcijos.h
+1790884100 c:\users\auste\desktop\lala\funkcijos.h
 	<string>
 	<vector>
 	"studentas.h"
@@ -15,7 +18,7 @@
 	<string>
 	<vector>
 
-1790879725 source:c:\users\auste\desktop\lala\main.cpp
+1790882980 source:c:\users\auste\desktop\lala\main.cpp
 	<iostream>
 	<string>
 	<vector>

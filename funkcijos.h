@@ -6,9 +6,9 @@
 #include "studentas.h"
 
 int ivestiSkaiciu(const std::string &zinute);
-void generuotiFaila(std::string failoPavadinimas, int kiekis, int nd_kiekis = 5);
+void generuotiFaila(const std::string& failoPavadinimas, int kiekis, int nd_kiekis = 5);
 void isvestiIFaila(const std::string &failoPavadinimas, const std::vector<studentas> &sarasas, int pasirinkimas);
-void printas(studentas &A, int pasirinkimas);
+void printas(const studentas& s, int pasirinkimas);
 
 #endif
 
