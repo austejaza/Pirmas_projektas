@@ -8,7 +8,6 @@
 #include <ctime>
 #include <fstream>
 #include <list>
-
 #include "studentas.h"
 #include "funkcijos.h"
 
