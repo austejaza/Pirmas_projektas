@@ -36,4 +36,4 @@ Palyginimas atliktas tarp `std::list` ir `std::vector` konteinerių naudojant sk
 
 1. **Rūšiavimo greitis:** Rezultatai rodo, kad `std::list` su didesniais duomenų kiekiais tvarkosi greičiau nei `std::vector`.
 2. **Nuskaitymas ir išvedimas:** Failų nuskaitymo ir išvedimo laikai per daug nesiskyrė.
-3. **Galutinis rezultatas:** Lyginant bendrą sugaištą laiką, `std::list` yra geresnis pasirinkimas, žiūrint laiko atžvilgiu, ypač dirbant su milijonais įrašų.
+3. **Galutinis rezultatas:** Lyginant bendrą sugaištą laiką, `std::list` yra geresnis pasirinkimas laiko atžvilgiu, ypač dirbant su milijonais įrašų.
