@@ -22,3 +22,12 @@ Palyginimas atliktas tarp `std::list` ir `std::vector` konteinerių naudojant sk
 | | `std::vector` | 5.022 | 4.417 | 2.118 | 11.558 |
 | **10 000 000** | `std::list` | 51.317 | 24.186 | 22.874 | 98.877 |
 | | `std::vector` | 52.103 | 52.929 | 21.046 | 126.069 |
+
+
+## Programos veikimo pavyzdžiai (1 000 000 įrašų)
+
+**Programos veikimas su `std::vector` konteineriu:**
+![Vector rezultatas](Rezultatai_1.png)
+
+**Programos veikimas su `std::list` konteineriu:**
+![List rezultatas](Rezultatai_2.png)
