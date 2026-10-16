@@ -1,16 +1,24 @@
-# Pirmas_projektas
-Programos veikimo spartos analizė:
-Atliekant programos testavimą buvo matuojamas trijų pagrindinių etapų laikas: duomenų nuskaitymas iš failo(1), studentų rūšiavimas į dvi grupes(2) bei rezultatų išvedimas į atskirus failus(3). Testavimas atliktas su 5 skirtingo dydžio sugeneruotais duomenų failais.
-Testavimo rezultatai:
+# Testavimo rezultatai
+Programos versija "v0.3" skirta ištirti ir palyginti programos spartą naudojant skirtingus konteinerius: "std::vector" ir "std::list".
 
-1000 įrašų: 1. 0.006s, 2. 0.001s, 3. 0.004s, bendras: 0.011s
+Testavimo sistemos parametrai:
+* **CPU:** AMD Ryzen 7 7730U
+* **RAM:** 16 GB
+* **Diskas:** SSD
 
-10000 įrašų: 1. 0.054s, 2. 0.007s, 3. 0.025s, bendras: 0.086s
+## Spartos analizės rezultatai(sekundėmis):
 
-100000 įrašų: 1. 0.53s, 2. 0.058s, 3. 0.231s, bendras: 0.819s
+Palyginimas atliktas tarp `std::list` ir `std::vector` konteinerių naudojant skirtingą įrašų kiekį. Pateikti vidutiniai duomenų nuskaitymo, rūšiavimo ir išvedimo laikai bei bendras laikas.
 
-1000000 įrašų: 1. 7.487s, 2. 0.657s, 3. 2.316s, bendras: 10.46s
-
-10000000 įrašų: 1. 56.614s, 2. 5.468s, 3. 22.572s, bendras: 84.654s
-
-Išvados: Didžiausią laiko dalį užima duomenų nuskaitymo ir išvedimo į failus operacijos.
+| Įrašų kiekis | Konteineris | Nuskaitymas | Rūšiavimas  | Išvedimas  | Bendras laikas  |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **1 000** | `std::list` | 0.006 | 0.001 | 0.006 | 0.013 |
+| | `std::vector` | 0.005 | 0.003 | 0.092 | 0.100 |
+| **10 000** | `std::list` | 0.053 | 0.013 | 0.024 | 0.089 |
+| | `std::vector` | 0.050 | 0.0285 | 0.027 | 0.105 |
+| **100 000** | `std::list` | 0.522 | 0.185 | 0.272 | 0.981 |
+| | `std::vector` | 0.510 | 0.362 | 0.216 | 1.055 |
+| **1 000 000** | `std::list` | 5.315 | 2.007 | 2.261 | 9.583 |
+| | `std::vector` | 5.022 | 4.417 | 2.118 | 11.558 |
+| **10 000 000** | `std::list` | 51.317 | 24.186 | 22.874 | 98.877 |
+| | `std::vector` | 52.103 | 57.929 | 21.046 | 126.069 |
