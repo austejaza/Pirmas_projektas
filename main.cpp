@@ -235,6 +235,9 @@ int main() {
 
             for (int j = 0; j < n; j++) {
                 A.paz.clear();
+
+                std::cout << "Studento objekto atminties adresas atmintyje: " << &A << "\n";
+
                 std::cout << "\nIveskite studento vardas ir pavarde: ";
                 std::cin >> A.vardas >> A.pavarde;
 
