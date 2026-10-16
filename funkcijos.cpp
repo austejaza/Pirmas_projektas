@@ -66,7 +66,38 @@ void isvestiIFaila(const std::string& failo_pavadinimas, const std::vector<stude
     }
     fr.close();
 }
+void isvestiIFaila(const std::string& failo_pavadinimas, const std::list<studentas>& sarasas, int pasirinkimas) {
+    std::ofstream fr(failo_pavadinimas);
+    if (!fr.is_open()) return;
 
+    fr << std::left << std::setw(15) << "Vardas"
+       << std::left << std::setw(15) << "Pavarde";
+    if (pasirinkimas == 1) {
+        fr << std::right << std::setw(18) << "Galutinis (Vid.)" << "\n";
+        fr << std::string(48, '-') << "\n";
+    } else if (pasirinkimas == 2) {
+        fr << std::right << std::setw(18) << "Galutinis (Med.)" << "\n";
+        fr << std::string(48, '-') << "\n";
+    } else {
+        fr << std::right << std::setw(18) << "Galutinis (Vid.)"
+           << std::right << std::setw(18) << "Galutinis (Med.)" << "\n";
+        fr << std::string(66, '-') << "\n";
+    }
+
+    for (const auto& s : sarasas) {
+        fr << std::left << std::setw(15) << s.vardas
+           << std::left << std::setw(15) << s.pavarde;
+        if (pasirinkimas == 1) {
+            fr << std::right << std::setw(18) << std::fixed << std::setprecision(2) << s.galutinis_vid << "\n";
+        } else if (pasirinkimas == 2) {
+            fr << std::right << std::setw(18) << std::fixed << std::setprecision(2) << s.galutinis_med << "\n";
+        } else {
+            fr << std::right << std::setw(18) << std::fixed << std::setprecision(2) << s.galutinis_vid
+               << std::right << std::setw(18) << std::fixed << std::setprecision(2) << s.galutinis_med << "\n";
+        }
+    }
+    fr.close();
+}
 void generuotiFaila(const std::string& failoPavadinimas, int kiekis, int nd_kiekis) {
     clock_t pradzia = clock();
 

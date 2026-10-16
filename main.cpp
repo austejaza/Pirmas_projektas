@@ -7,12 +7,14 @@
 #include <cstdlib>
 #include <ctime>
 #include <fstream>
+#include <list>
 
 #include "studentas.h"
 #include "funkcijos.h"
 
 using std::string;
 using std::vector;
+using std::list;
 
 int main() {
     srand(time(0));
@@ -25,7 +27,7 @@ int main() {
 
     if (rezimas == 1) {
         string failo_pavadinimas = "";
-        vector<studentas> sarasas;
+        list<studentas> sarasas;
         studentas A;
 
         std::cout << "Pasirinkite veiksma:\n";
@@ -118,8 +120,8 @@ int main() {
 
         clock_t pradzia_rus = clock();
 
-        vector<studentas> vargsiukai;
-        vector<studentas> kietiakiai;
+        list<studentas> vargsiukai;
+        list<studentas> kietiakiai;
 
         for (const auto &s : sarasas) {
             if (s.galutinis_vid < 5.0) {
@@ -128,11 +130,11 @@ int main() {
                 kietiakiai.push_back(s);
             }
         }
-        std::sort(vargsiukai.begin(), vargsiukai.end(), [](const studentas& a, const studentas& b) {
+        vargsiukai.sort([](const studentas& a, const studentas& b) {
             return a.galutinis_vid > b.galutinis_vid;
         });
 
-        std::sort(kietiakiai.begin(), kietiakiai.end(), [](const studentas& a, const studentas& b) {
+        kietiakiai.sort([](const studentas& a, const studentas& b) {
             return a.galutinis_vid > b.galutinis_vid;
         });
 

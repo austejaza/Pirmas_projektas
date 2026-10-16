@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1792092189 source:c:\users\auste\desktop\pirmas_projektas-0.3\funkcijos.cpp
+1792146917 source:c:\users\auste\desktop\pirmas_projektas-0.3\funkcijos.cpp
 	"funkcijos.h"
 	<iostream>
 	<fstream>
@@ -9,16 +9,17 @@
 	<cstdlib>
 	<ctime>
 
-1792092189 c:\users\auste\desktop\pirmas_projektas-0.3\funkcijos.h
+1792146917 c:\users\auste\desktop\pirmas_projektas-0.3\funkcijos.h
 	<string>
 	<vector>
+	<list>
 	"studentas.h"
 
 1792092189 c:\users\auste\desktop\pirmas_projektas-0.3\studentas.h
 	<string>
 	<vector>
 
-1792093769 source:c:\users\auste\desktop\pirmas_projektas-0.3\main.cpp
+1792146709 source:c:\users\auste\desktop\pirmas_projektas-0.3\main.cpp
 	<iostream>
 	<string>
 	<vector>
@@ -28,6 +29,7 @@
 	<cstdlib>
 	<ctime>
 	<fstream>
+	<list>
 	"studentas.h"
 	"funkcijos.h"
 
