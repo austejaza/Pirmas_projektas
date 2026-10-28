@@ -203,6 +203,48 @@ int main() {
 
 
 
+        vector<studentas> sarasas_v2 = sarasas_v;
+        clock_t pradzia_strat2_v = clock();
+
+        vector<studentas> vargsiukai_v2;
+        for (auto it = sarasas_v2.begin(); it != sarasas_v2.end(); ) {
+            if (it->galutinis_vid < 5.0) {
+                vargsiukai_v2.push_back(*it);
+                it = sarasas_v2.erase(it);
+            } else {
+                ++it;
+            }
+        }
+
+        std::sort(vargsiukai_v2.begin(), vargsiukai_v2.end(), [](const studentas& a, const studentas& b) { return a.galutinis_vid > b.galutinis_vid; });
+        std::sort(sarasas_v2.begin(), sarasas_v2.end(), [](const studentas& a, const studentas& b) { return a.galutinis_vid > b.galutinis_vid; });
+
+        clock_t pabaiga_strat2_v = clock();
+        double laikas_strat2_v = double(pabaiga_strat2_v - pradzia_strat2_v) / CLOCKS_PER_SEC;
+        std::cout << "2c. Studentu rusiavimas i 2 grupes (2 strategija su vector) uztruko: " << laikas_strat2_v << " s.\n";
+
+
+
+        list<studentas> sarasas_l2 = sarasas_l;
+        clock_t pradzia_strat2_l = clock();
+
+        list<studentas> vargsiukai_l2;
+        for (auto it = sarasas_l2.begin(); it != sarasas_l2.end(); ) {
+            if (it->galutinis_vid < 5.0) {
+                vargsiukai_l2.push_back(*it);
+                it = sarasas_l2.erase(it);
+            } else {
+                ++it;
+            }
+        }
+
+        vargsiukai_l2.sort([](const studentas& a, const studentas& b) { return a.galutinis_vid > b.galutinis_vid; });
+        sarasas_l2.sort([](const studentas& a, const studentas& b) { return a.galutinis_vid > b.galutinis_vid; });
+
+        clock_t pabaiga_strat2_l = clock();
+        double laikas_strat2_l = double(pabaiga_strat2_l - pradzia_strat2_l) / CLOCKS_PER_SEC;
+        std::cout << "2d. Studentu rusiavimas i 2 grupes (2 strategija su list) uztruko:   " << laikas_strat2_l << " s.\n";
+
 
         clock_t pradzia_isv_v = clock();
         isvestiIFaila("vargsiukai_v.txt", vargsiukai_v, 1);
@@ -216,8 +258,8 @@ int main() {
         clock_t pabaiga_isv_l = clock();
         double laikas_isv_l = double(pabaiga_isv_l - pradzia_isv_l) / CLOCKS_PER_SEC;
 
-        std::cout << "3a. Išvedimas (std::vector) uztruko: " << laikas_isv_v << " s.\n";
-        std::cout << "3b. Išvedimas (std::list) uztruko:   " << laikas_isv_l << " s.\n";
+        std::cout << "3a. Isvedimas (std::vector) uztruko: " << laikas_isv_v << " s.\n";
+        std::cout << "3b. Isvedimas (std::list) uztruko:   " << laikas_isv_l << " s.\n";
 
         double bendras_laikas = laikas_nusk_v + laikas_nusk_l + laikas_vec + laikas_list + laikas_isv_v + laikas_isv_l;
         std::cout << "-------------------------------------------\n";
