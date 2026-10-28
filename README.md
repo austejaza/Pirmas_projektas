@@ -1,39 +1,36 @@
-# Testavimo rezultatai
-Programos versija "v0.3" skirta ištirti ir palyginti programos spartą naudojant skirtingus konteinerius: "std::vector" ir "std::list".
+# Programos veikimo spartos tyrimas (v1.0)
 
-Testavimo sistemos parametrai:
-* **CPU:** AMD Ryzen 7 7730U
-* **RAM:** 16 GB
-* **Diskas:** SSD
+Šiame tyrime lyginamas `std::vector` ir `std::list` konteinerių bei 3 skirtingų dalijimo į dvi kategorijas („vargšiukai“ ir „kietiakai“) strategijų efektyvumas.
 
-## Spartos analizės rezultatai(sekundėmis):
+## Spartos analizės rezultatai (sekundėmis)
 
-Palyginimas atliktas tarp `std::list` ir `std::vector` konteinerių naudojant skirtingą įrašų kiekį. Pateikti vidutiniai duomenų nuskaitymo, rūšiavimo ir išvedimo laikai bei bendras laikas.
-
-| Įrašų kiekis | Konteineris | Nuskaitymas | Rūšiavimas  | Išvedimas  | Bendras laikas  |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **1 000** | `std::list` | 0.006 | 0.001 | 0.006 | 0.013 |
-| | `std::vector` | 0.005 | 0.003 | 0.088 | 0.096 |
-| **10 000** | `std::list` | 0.053 | 0.013 | 0.024 | 0.089 |
-| | `std::vector` | 0.050 | 0.0285 | 0.027 | 0.105 |
-| **100 000** | `std::list` | 0.522 | 0.185 | 0.272 | 0.981 |
-| | `std::vector` | 0.510 | 0.362 | 0.216 | 1.055 |
-| **1 000 000** | `std::list` | 5.315 | 2.007 | 2.261 | 9.583 |
-| | `std::vector` | 5.022 | 4.417 | 2.118 | 11.558 |
-| **10 000 000** | `std::list` | 51.317 | 24.186 | 22.874 | 98.877 |
-| | `std::vector` | 52.103 | 52.929 | 21.046 | 126.069 |
-
-
-## Programos veikimo pavyzdžiai (1 000 000 įrašų)
-
-**Programos veikimas su `std::vector` konteineriu:**
-![Vector rezultatas](Rezultatai_1.png)
-
-**Programos veikimas su `std::list` konteineriu:**
-![List rezultatas](Rezultatai_2.png)
+| Įrašų kiekis | Konteineris ir Strategija | Nuskaitymas (s) | Rūšiavimas (s) | Išvedimas (s) | Bendras laikas (s)|
+|--------------|---------------------------|-----------------|----------------|---------------|-------------------|
+| **1 000**    | `std::vector` (1 strat.)  | 0.006           | 0.003          | 0.005         | 0.014             |
+|              | `std::list` (1 strat.)    | 0.006           | 0.001          | 0.004         | 0.011             |
+|              | `std::vector` (2 strat.)  | 0.006           | 0.046          | 0.005         | 0.057             |
+|              | `std::list` (2 strat.)    | 0.006           | 0.001          | 0.004         | 0.011             |
+|              | `std::vector` (3 strat. `partition`) | 0.006 | 0.003         | 0.005         | 0.014             |
+| **10 000**   | `std::vector` (1 strat.)  | 0.053           | 0.029          | 0.029         | 0.111             |
+|              | `std::list` (1 strat.)    | 0.050           | 0.015          | 0.034         | 0.099             |
+|              | `std::vector` (2 strat.)  | 0.053           | 4.254          | 0.029         | 4.336             |
+|              | `std::list` (2 strat.)    | 0.050           | 0.010          | 0.034         | 0.094             |
+|              | `std::vector` (3 strat. `partition`) | 0.053 | 0.026         | 0.029         | 0.108             |
+| **100 000**  | `std::vector` (1 strat.)  | 0.543           | 0.303          | 0.247         | 1.093             |
+|              | `std::list` (1 strat.)    | 0.521           | 0.235          | 0.245         | 1.001             |
+|              | `std::list` (2 strat.)    | 0.521           | 0.131          | 0.245         | 0.897             |
+|              | `std::vector` (3 strat. `partition`) | 0.543 | 0.280         | 0.247         | 1.070             |
+| **1 000 000**| `std::vector` (1 strat.)  | 5.195           | 3.736          | 2.251         | 11.182            |
+|              | `std::list` (1 strat.)    | 5.115           | 2.264          | 2.503         | 9.882             |
+|              | `std::list` (2 strat.)    | 5.115           | 1.958          | 2.503         | 9.576             |
+|              | `std::vector` (3 strat. `partition`) | 5.195 | 3.656         | 2.251         | 11.102            |
+| **10 000 000**| `std::vector` (1 strat.) | 28.033          | 17.261         | 9.041         | 54.335            |
+|              | `std::list` (1 strat.)    | 20.202          | 15.667         | 10.259        | 46.128            |
+|              | `std::list` (2 strat.)    | 20.202          | 14.524         | 10.259        | 44.985            |
+|              | `std::vector` (3 strat. `partition`) | 28.033 | 18.321       | 9.041         | 55.395            |
 
 ## Išvados
 
-1. **Rūšiavimo greitis:** Rezultatai rodo, kad `std::list` su didesniais duomenų kiekiais tvarkosi greičiau nei `std::vector`.
-2. **Nuskaitymas ir išvedimas:** Failų nuskaitymo ir išvedimo laikai per daug nesiskyrė.
-3. **Galutinis rezultatas:** Lyginant bendrą sugaištą laiką, `std::list` yra geresnis pasirinkimas laiko atžvilgiu, ypač dirbant su milijonais įrašų.
+1. **`std::list` efektyvumas:** `std::list` konteineris atlieka rūšiavimą ir trynimą (2 strategija) greičiau nei `std::vector`, nes elementų trynimas iš sąrašo vidurio neturi papildomų atminties perstūmimo sąnaudų.
+2. **2 strategija su `std::vector`:** Prie 10 000 įrašų trynimas užtruko 4.254s, o neįtraukta į didesnių duomenų lentelę (100k+), nes dėl elementų perstūmimo atmintyje trynimo metu ($O(N^2)$ sudėtingumas) veikia ekstremaliai lėtai.
+3. **3 strategija (`std::partition`):** Vektoriui leidžia greitai ir saugiai pertvarkyti duomenis vietoje be brangaus elementų trynimo.
