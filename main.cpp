@@ -246,6 +246,24 @@ int main() {
         std::cout << "2d. Studentu rusiavimas i 2 grupes (2 strategija su list) uztruko:   " << laikas_strat2_l << " s.\n";
 
 
+        vector<studentas> sarasas_v3 = sarasas_v;
+        clock_t pradzia_strat2_v3 = clock();
+        auto ribos_it = std::partition(sarasas_v3.begin(), sarasas_v3.end(), [](const studentas& s) {
+            return s.galutinis_vid < 5.0;
+        });
+
+        vector<studentas> vargsiukai_v3(sarasas_v3.begin(), ribos_it);
+        vector<studentas> kietiakiai_v3(ribos_it, sarasas_v3.end());
+
+        std::sort(vargsiukai_v3.begin(), vargsiukai_v3.end(), [](const studentas& a, const studentas& b) { return a.galutinis_vid > b.galutinis_vid; });
+        std::sort(kietiakiai_v3.begin(), kietiakiai_v3.end(), [](const studentas& a, const studentas& b) { return a.galutinis_vid > b.galutinis_vid; });
+
+        clock_t pabaiga_strat2_v3 = clock();
+        double laikas_strat2_v3 = double(pabaiga_strat2_v3 - pradzia_strat2_v3) / CLOCKS_PER_SEC;
+        std::cout << "2e. Studentu rusiavimas i 2 grupes (3 strategija su std::partition, vector) uztruko: " << laikas_strat2_v3 << " s.\n";
+
+
+
         clock_t pradzia_isv_v = clock();
         isvestiIFaila("vargsiukai_v.txt", vargsiukai_v, 1);
         isvestiIFaila("kietiakiai_v.txt", kietiakiai_v, 1);
@@ -261,9 +279,14 @@ int main() {
         std::cout << "3a. Isvedimas (std::vector) uztruko: " << laikas_isv_v << " s.\n";
         std::cout << "3b. Isvedimas (std::list) uztruko:   " << laikas_isv_l << " s.\n";
 
-        double bendras_laikas = laikas_nusk_v + laikas_nusk_l + laikas_vec + laikas_list + laikas_isv_v + laikas_isv_l;
+        double bendras_laikas_vector = laikas_nusk_v + laikas_vec + laikas_isv_v;
+        double bendras_laikas_list = laikas_nusk_l + laikas_list + laikas_isv_l;
+        double bendras_laikas_v_p = laikas_nusk_v + laikas_strat2_v3+ laikas_isv_v;
         std::cout << "-------------------------------------------\n";
-        std::cout << "Bendras viso proceso laikas: " << bendras_laikas << " s.\n\n";
+        std::cout << "1. Bendras viso proceso laikas(su vector): " << bendras_laikas_vector << " s.\n\n";
+        std::cout << "2. Bendras viso proceso laikas(su list): " << bendras_laikas_list << " s.\n\n";
+        std::cout << "3. Bendras viso proceso laikas(su vector ir partition): " << bendras_laikas_v_p << " s.\n\n";
+
     }
 
     else {
