@@ -67,3 +67,17 @@
 	<list>
 	"studentas.h"
 
+1793211427 source:c:\users\auste\desktop\pirmas_projektas-1.0\main.cpp
+	<iostream>
+	<string>
+	<vector>
+	<iomanip>
+	<algorithm>
+	<sstream>
+	<cstdlib>
+	<ctime>
+	<fstream>
+	<list>
+	"studentas.h"
+	"funkcijos.h"
+
