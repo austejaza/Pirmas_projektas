@@ -40,3 +40,30 @@
 
 1792093359 source:c:\users\auste\desktop\pirmas_projektas-0.3\v0.3_projektas\main.cpp
 
+1793198086 source:c:\users\auste\desktop\pirmas_projektas-1.0\studentas.cpp
+	"studentas.h"
+	<algorithm>
+	<numeric>
+
+1793198086 c:\users\auste\desktop\pirmas_projektas-1.0\studentas.h
+	<string>
+	<vector>
+
+1793198086 source:c:\users\auste\desktop\pirmas_projektas-1.0\v0.3_projektas\main.cpp
+
+1793198442 source:c:\users\auste\desktop\pirmas_projektas-1.0\funkcijos.cpp
+	"funkcijos.h"
+	<iostream>
+	<fstream>
+	<sstream>
+	<iomanip>
+	<limits>
+	<cstdlib>
+	<ctime>
+
+1793198086 c:\users\auste\desktop\pirmas_projektas-1.0\funkcijos.h
+	<string>
+	<vector>
+	<list>
+	"studentas.h"
+

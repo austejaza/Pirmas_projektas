@@ -26,8 +26,8 @@ int main() {
 
     if (rezimas == 1) {
         string failo_pavadinimas = "";
-        list<studentas> sarasas;
         studentas A;
+
 
         std::cout << "Pasirinkite veiksma:\n";
         std::cout << "1 - Sugeneruoti nauja duomenu faila\n";
@@ -70,7 +70,6 @@ int main() {
 
 
 
-
         std::ifstream fd(failo_pavadinimas);
         if (!fd.is_open()) {
             std::cout << "Klaida: Nepavyko atidaryti failo '" << failo_pavadinimas << "'!\n";
@@ -79,11 +78,14 @@ int main() {
 
         std::cout << "\n--- REZULTATAI (" << failo_pavadinimas << ") ---\n";
 
-        clock_t pradzia_nusk = clock();
+
+        vector<studentas> sarasas_v;
+        clock_t pradzia_nusk_v = clock();
+        std::ifstream fd1(failo_pavadinimas);
 
         string eilute;
-        std::getline(fd, eilute);
-        while (std::getline(fd, eilute)) {
+        std::getline(fd1, eilute);
+        while (std::getline(fd1, eilute)) {
             if (eilute.empty()) continue;
 
             std::stringstream ss(eilute);
@@ -108,54 +110,118 @@ int main() {
             A.galutinis_vid = 0.4 * vid + 0.6 * A.exam;
             A.galutinis_med = 0.4 * med + 0.6 * A.exam;
 
-            sarasas.push_back(A);
+            sarasas_v.push_back(A);
             A.paz.clear();
         }
-        fd.close();
+        fd1.close();
+        clock_t pabaiga_nusk_v = clock();
+        double laikas_nusk_v = double(pabaiga_nusk_v - pradzia_nusk_v) / CLOCKS_PER_SEC;
 
-        clock_t pabaiga_nusk = clock();
-        double laikas_nusk = double(pabaiga_nusk - pradzia_nusk) / CLOCKS_PER_SEC;
-        std::cout << "1. Duomenu nuskaitymas is failo uztruko: " << laikas_nusk << " s.\n";
+        list<studentas> sarasas_l;
+        clock_t pradzia_nusk_l = clock();
 
-        clock_t pradzia_rus = clock();
+        std::ifstream fd2(failo_pavadinimas);
+        std::getline(fd2, eilute);
+        while (std::getline(fd2, eilute)) {
+            if (eilute.empty()) continue;
+            std::stringstream ss(eilute);
+            ss >> A.vardas >> A.pavarde;
+            int skaicius;
+            vector<int> visi_skaiciai;
+            while (ss >> skaicius) visi_skaiciai.push_back(skaicius);
+            if (!visi_skaiciai.empty()) {
+                A.exam = visi_skaiciai.back();
+                visi_skaiciai.pop_back();
+                A.paz = visi_skaiciai;
+            }
+            float sum = 0;
+            for (int p : A.paz) sum += p;
+            float vid = !A.paz.empty() ? sum / A.paz.size() : 0.0;
+            float med = Mediana(A.paz);
+            A.galutinis_vid = 0.4 * vid + 0.6 * A.exam;
+            A.galutinis_med = 0.4 * med + 0.6 * A.exam;
+            sarasas_l.push_back(A);
+            A.paz.clear();
+        }
+        fd2.close();
+        clock_t pabaiga_nusk_l = clock();
+        double laikas_nusk_l = double(pabaiga_nusk_l - pradzia_nusk_l) / CLOCKS_PER_SEC;
 
-        list<studentas> vargsiukai;
-        list<studentas> kietiakiai;
+        std::cout << "\n--- REZULTATAI (" << failo_pavadinimas << ") ---\n";
+        std::cout << "1a. Nuskaitymas (std::vector) uztruko: " << laikas_nusk_v << " s.\n";
+        std::cout << "1b. Nuskaitymas (std::list) uztruko:   " << laikas_nusk_l << " s.\n";
 
-        for (const auto &s : sarasas) {
+        clock_t pradzia_vec = clock();
+
+        vector<studentas> vargsiukai_v;
+        vector<studentas> kietiakiai_v;
+
+        for (const auto &s : sarasas_v) {
             if (s.galutinis_vid < 5.0) {
-                vargsiukai.push_back(s);
+                vargsiukai_v.push_back(s);
             } else {
-                kietiakiai.push_back(s);
+                kietiakiai_v.push_back(s);
             }
         }
-        vargsiukai.sort([](const studentas& a, const studentas& b) {
+
+        std::sort(vargsiukai_v.begin(), vargsiukai_v.end(), [](const studentas& a, const studentas& b) {
             return a.galutinis_vid > b.galutinis_vid;
         });
 
-        kietiakiai.sort([](const studentas& a, const studentas& b) {
+        std::sort(kietiakiai_v.begin(), kietiakiai_v.end(), [](const studentas& a, const studentas& b) {
+            return a.galutinis_vid > b.galutinis_vid;
+        });
+
+        clock_t pabaiga_vec = clock();
+        double laikas_vec = double(pabaiga_vec - pradzia_vec) / CLOCKS_PER_SEC;
+        std::cout << "2a. Studentu rusiavimas i 2 grupes (1 strategija su vector) uztruko: " << laikas_vec << " s.\n";
+
+        clock_t pradzia_list = clock();
+
+        list<studentas> vargsiukai_l;
+        list<studentas> kietiakiai_l;
+
+        for (const auto &s : sarasas_l) {
+            if (s.galutinis_vid < 5.0) {
+                vargsiukai_l.push_back(s);
+            } else {
+                kietiakiai_l.push_back(s);
+            }
+        }
+        vargsiukai_l.sort([](const studentas& a, const studentas& b) {
+            return a.galutinis_vid > b.galutinis_vid;
+        });
+
+        kietiakiai_l.sort([](const studentas& a, const studentas& b) {
             return a.galutinis_vid > b.galutinis_vid;
         });
 
 
+        clock_t pabaiga_list = clock();
+        double laikas_list = double(pabaiga_list - pradzia_list) / CLOCKS_PER_SEC;
+        std::cout << "2b. Studentu rusiavimas i 2 grupes (1 strategija su list) uztruko: " << laikas_list << " s.\n";
 
-        clock_t pabaiga_rus = clock();
-        double laikas_rus = double(pabaiga_rus - pradzia_rus) / CLOCKS_PER_SEC;
-        std::cout << "2. Studentu rusiavimas i 2 grupes uztruko: " << laikas_rus << " s.\n";
 
-        clock_t pradzia_isv = clock();
 
-        isvestiIFaila("vargsiukai.txt", vargsiukai, 1);
-        isvestiIFaila("kietiakiai.txt", kietiakiai, 1);
 
-        clock_t pabaiga_isv = clock();
-        double laikas_isv = double(pabaiga_isv - pradzia_isv) / CLOCKS_PER_SEC;
-        std::cout << "3. Isvedimas i du naujus failus uztruko: " << laikas_isv << " s.\n";
+        clock_t pradzia_isv_v = clock();
+        isvestiIFaila("vargsiukai_v.txt", vargsiukai_v, 1);
+        isvestiIFaila("kietiakiai_v.txt", kietiakiai_v, 1);
+        clock_t pabaiga_isv_v = clock();
+        double laikas_isv_v = double(pabaiga_isv_v - pradzia_isv_v) / CLOCKS_PER_SEC;
 
-        double bendras_laikas = laikas_nusk + laikas_rus + laikas_isv;
+        clock_t pradzia_isv_l = clock();
+        isvestiIFaila("vargsiukai_l.txt", vargsiukai_l, 1);
+        isvestiIFaila("kietiakiai_l.txt", kietiakiai_l, 1);
+        clock_t pabaiga_isv_l = clock();
+        double laikas_isv_l = double(pabaiga_isv_l - pradzia_isv_l) / CLOCKS_PER_SEC;
+
+        std::cout << "3a. Išvedimas (std::vector) uztruko: " << laikas_isv_v << " s.\n";
+        std::cout << "3b. Išvedimas (std::list) uztruko:   " << laikas_isv_l << " s.\n";
+
+        double bendras_laikas = laikas_nusk_v + laikas_nusk_l + laikas_vec + laikas_list + laikas_isv_v + laikas_isv_l;
         std::cout << "-------------------------------------------\n";
         std::cout << "Bendras viso proceso laikas: " << bendras_laikas << " s.\n\n";
-
     }
 
     else {
