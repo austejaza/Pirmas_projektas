@@ -54,3 +54,23 @@ Paleidus programą, vartotojui pateikiamas pasirinkimas tarp dviejų pagrindini�
 2. **Įprastas skaičiavimo režimas (2 režimas):**
    - Leidžia įvesti studentų duomenis ranka, generuoti atsitiktinius pažymius arba nuskaityti duomenis iš egzistuojančio failo.
    - Suteikia galimybę pasirinkti: ar galutinis balas bus skaičiuojamas pagal vidurkį, ar pagal medianą.
+
+
+ ## Naudojimosi instrukcija
+
+1. **Kompiliavimas:** 
+   Projektje pateiktas universalus `Makefile`, leidžiantis akimirksniu sukompiliuoti visus programos modulius (`main.cpp`, `funkcijos.cpp`, `studentas.cpp`).
+   - Norėdami sukompiliuoti programą, terminale įveskite:
+     ```bash
+     make
+     ```
+   - Norėdami išvalyti sukompiliuotus failus ir nereikalingus `.txt` duomenis, įveskite:
+     ```bash
+     make clean
+     ```
+
+2. **Paleidimas:**
+   Komplektacijoje paruošus programą, ją paleisti galima įvykdytuku:
+   - Linux / macOS / Git Bash terminale: `./programa`
+   - Windows PowerShell: `./programa.exe`
+
