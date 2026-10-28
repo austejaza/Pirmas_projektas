@@ -34,3 +34,23 @@
 1. **`std::list` efektyvumas:** `std::list` konteineris atlieka rūšiavimą ir trynimą (2 strategija) greičiau nei `std::vector`, nes elementų trynimas iš sąrašo vidurio neturi papildomų atminties perstūmimo sąnaudų.
 2. **2 strategija su `std::vector`:** Prie 10 000 įrašų trynimas užtruko 4.254s, o neįtraukta į didesnių duomenų lentelę (100k+), nes dėl elementų perstūmimo atmintyje trynimo metu ($O(N^2)$ sudėtingumas) veikia ekstremaliai lėtai.
 3. **3 strategija (`std::partition`):** Vektoriui leidžia greitai ir saugiai pertvarkyti duomenis vietoje be brangaus elementų trynimo.
+
+
+# Studentų rezultatų skaičiavimo ir spartos analizės sistema (v1.0)
+
+Ši programa skirtas studentų namų darbų ir egzamino rezultatų apdorojimui, galutinio balo (pagal vidurkį arba medianą) skaičiavimui bei studentų rūšiavimui į dvi kategorijas („vargšiukai“ ir „kietiakai“). Taip pat programoje atliktas išsamus skirtingų C++ konteinerių (`std::vector` ir `std::list`) bei duomenų rūšiavimo strategijų veikimo spartos tyrimas.
+
+---
+
+## Programos režimai
+
+Paleidus programą, vartotojui pateikiamas pasirinkimas tarp dviejų pagrindinių režimų:
+
+1. **Spartos analizės režimas (1 režimas):**
+   - Leidžia automatiškai sugeneruoti arba nuskityti didelės apimties duomenų failus.
+   - Atlieka ir išmatuoja tris pagrindinius etapus: failo nuskaitymą, studentų rūšiavimą į grupes ir galutinių rezultatų išvedimą į failus.
+   - Lyginamas `std::vector` ir `std::list` konteinerių efektyvumas bei skirtingos duomenų skaidymo strategijos.
+
+2. **Įprastas skaičiavimo režimas (2 režimas):**
+   - Leidžia įvesti studentų duomenis ranka, generuoti atsitiktinius pažymius arba nuskaityti duomenis iš egzistuojančio failo.
+   - Suteikia galimybę pasirinkti: ar galutinis balas bus skaičiuojamas pagal vidurkį, ar pagal medianą.
