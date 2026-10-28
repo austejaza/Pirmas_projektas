@@ -1,0 +1,42 @@
+# depslib dependency file v1.0
+1792146917 source:c:\users\auste\desktop\pirmas_projektas-0.3\funkcijos.cpp
+	"funkcijos.h"
+	<iostream>
+	<fstream>
+	<sstream>
+	<iomanip>
+	<limits>
+	<cstdlib>
+	<ctime>
+
+1792146917 c:\users\auste\desktop\pirmas_projektas-0.3\funkcijos.h
+	<string>
+	<vector>
+	<list>
+	"studentas.h"
+
+1792092189 c:\users\auste\desktop\pirmas_projektas-0.3\studentas.h
+	<string>
+	<vector>
+
+1792149243 source:c:\users\auste\desktop\pirmas_projektas-0.3\main.cpp
+	<iostream>
+	<string>
+	<vector>
+	<iomanip>
+	<algorithm>
+	<sstream>
+	<cstdlib>
+	<ctime>
+	<fstream>
+	<list>
+	"studentas.h"
+	"funkcijos.h"
+
+1792092189 source:c:\users\auste\desktop\pirmas_projektas-0.3\studentas.cpp
+	"studentas.h"
+	<algorithm>
+	<numeric>
+
+1792093359 source:c:\users\auste\desktop\pirmas_projektas-0.3\v0.3_projektas\main.cpp
+
