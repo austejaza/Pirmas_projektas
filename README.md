@@ -29,6 +29,14 @@
 |              | `std::list` (2 strat.)    | 20.202          | 14.524         | 10.259        | 44.985            |
 |              | `std::vector` (3 strat. `partition`) | 28.033 | 18.321       | 9.041         | 55.395            |
 
+### Programos veikimo ir spartos tyrimo rezultatai
+
+#### Testavimas su 10,000 įrašų:
+![Testavimo rezultatai su 10000 įrašų](rezultatai_10000.png)
+
+#### Testavimas su 10,000,000 įrašų:
+![Testavimo rezultatai su 10000000 įrašų](rezultatai_10000000.png)
+
 ## Išvados
 
 1. **`std::list` efektyvumas:** `std::list` konteineris atlieka rūšiavimą ir trynimą (2 strategija) greičiau nei `std::vector`, nes elementų trynimas iš sąrašo vidurio neturi papildomų atminties perstūmimo sąnaudų.
