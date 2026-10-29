@@ -74,3 +74,15 @@ Paleidus programą, vartotojui pateikiamas pasirinkimas tarp dviejų pagrindini�
    - Linux / macOS / Git Bash terminale: `./programa`
    - Windows PowerShell: `./programa.exe`
 
+
+## Diegimas ir kompiliavimas (Makefile)
+
+## Diegimo, kompiliavimo ir paleidimo instrukcija
+
+Projektas suprojektuotas taip, kad jį būtų galima lengvai sukompiliuoti ir paleisti naudojant automatizuotą `Makefile` failą.
+
+### 1. Kompiliavimas naudojant Makefile
+Jei operacinėje sistemoje yra palaikoma `make` komanda, visus source failus (`main.cpp`, `funkcijos.cpp`, `studentas.cpp`) galite sukompiliuoti vienu žingsniu:
+- **Komanda kompiliavimui:**
+  ```bash
+  make
