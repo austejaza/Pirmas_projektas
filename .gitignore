@@ -1,2 +1,13 @@
 
-studentai*.txt
+*.exe
+*.o
+*.out
+programa
+
+*.layout
+*.depend
+bin/
+obj/
+.vscode/
+
+*.txt
